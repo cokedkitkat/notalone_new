@@ -53,7 +53,8 @@ export default function ParticleVortex() {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const scale = Math.min(1, Math.max(0.55, width / 1280));
+      const responsiveScale = Math.min(1, Math.max(0.55, width / 1280));
+      const scale = responsiveScale * 1.3;
       ctx.lineCap = "round";
 
       groups.forEach((group, colorIndex) => {
