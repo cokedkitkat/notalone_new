@@ -13,15 +13,20 @@ export default function Logo({
 }: LogoProps) {
   return (
     <div className={`flex items-center gap-2.5 ${className}`}>
-      <Image
-        src="/logo-original.png"
-        alt="NOT ALONE"
-        width={size}
-        height={size}
-        unoptimized
-        priority
-        className="shrink-0"
-      />
+      <span
+        className="flex shrink-0 items-center justify-center rounded-full bg-[#111827] shadow-sm"
+        style={{ width: size, height: size }}
+      >
+        <Image
+          src="/logo-original.png"
+          alt=""
+          width={size}
+          height={size}
+          unoptimized
+          priority
+          className="block"
+        />
+      </span>
 
       {showText && (
         <span className="font-heading text-[17px] font-semibold tracking-tight text-[#111827]">
