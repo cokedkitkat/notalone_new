@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+/* ─── Color System (Matching Google Antigravity Clean Light Theme) ─── */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #f1f3f4;
+  --text-primary: #111827;
+  --text-secondary: #5f6368;
+  --text-muted: #80868b;
+  --border-subtle: #e8eaed;
+  --border-card: #f1f3f4;
+  --accent-black: #000000;
+  --accent-blue: #1a73e8;
+  --accent-purple: #8b5cf6;
+  --accent-pink: #ec4899;
+
+  /* Exact Google Antigravity font stack */
+  --font-headline: "Google Sans", "Google Sans Display", "Product Sans", "Plus Jakarta Sans", "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Google Sans Text", "Google Sans", "Product Sans", "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ─── Base Reset ─── */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Exact Google Antigravity Headline Styling ─── */
+.font-heading {
+  font-family: var(--font-headline);
+}
+
+.antigravity-headline {
+  font-family: var(--font-headline);
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  font-weight: 500;
+}
+
+.antigravity-manifesto {
+  font-family: var(--font-headline);
+  letter-spacing: -0.035em;
+  line-height: 1.18;
+  font-weight: 500;
+}
+
+/* ─── Gradient Text Animation ─── */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-text {
+  background: linear-gradient(
+    90deg,
+    #1a73e8,
+    #8b5cf6,
+    #ec4899,
+    #ea4335,
+    #fbbc04,
+    #34a853,
+    #1a73e8
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 8s ease infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-gradient-text {
+    animation: none;
+    background-size: 100% 100%;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ─── Focus Visible ─── */
+:focus-visible {
+  outline: 2px solid #1a73e8;
+  outline-offset: 2px;
+  border-radius: 9999px;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dadce0;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #bdc1c6;
+}
