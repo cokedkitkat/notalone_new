@@ -18,8 +18,9 @@ export default function Logo({
         alt="NOT ALONE"
         width={size}
         height={size}
-        className="shrink-0 object-contain"
+        unoptimized
         priority
+        className="shrink-0"
       />
 
       {showText && (
