@@ -7,38 +7,10 @@ import CommunityMockup from "./CommunityMockup";
 import PrivacyMockup from "./PrivacyMockup";
 
 const features = [
-  {
-    badge: "Always Present",
-    title: "Chat anytime, about anything",
-    description:
-      "Your companion is ready whenever you are — morning reflections, late-night deep talks, or casual banters throughout the day. No judgment, no interruptions, and genuine attentive replies.",
-    mockup: <ChatFeatureMockup />,
-  },
-  {
-    badge: "Interactive Fun",
-    title: "Play classic games together",
-    description:
-      "Take a relaxing break. Challenge your companion to friendly matches of Tic Tac Toe or strategic Chess. They react in real time, celebrate your victories, and provide fun commentary.",
-    mockup: <GamesFeatureMockup />,
-    reversed: true,
-  },
-  {
-    id: "community",
-    badge: "Shared Connection",
-    title: "Join a warm community space",
-    description:
-      "Share moments, discover fellow companion creators, and participate in positive discussions. A safe, moderated environment built to make everyone feel welcomed and valued.",
-    mockup: <CommunityMockup />,
-  },
-  {
-    id: "security",
-    badge: "Safety by Design",
-    title: "Your privacy, completely protected",
-    description:
-      "Your chats and memories are sacred. We use end-to-end encryption, will never sell your data, and give you full power to clear your history with a single tap.",
-    mockup: <PrivacyMockup />,
-    reversed: true,
-  },
+  { badge: "Conversation Concept", title: "Imagine a companion for everyday moments", description: "Explore how a conversational companion could support reflections, casual chats, and moments of curiosity. This site is a product preview, not a live chat service.", mockup: <ChatFeatureMockup /> },
+  { badge: "Interactive Fun", title: "Preview games for shared downtime", description: "See examples of friendly Tic Tac Toe and chess experiences designed for a future companion platform. The boards shown here are illustrative demos.", mockup: <GamesFeatureMockup />, reversed: true },
+  { id: "community", badge: "Shared Connection", title: "A community space, designed thoughtfully", description: "Explore the idea of a welcoming community for companion creators and curious people. Community features and moderation policies will be described before launch.", mockup: <CommunityMockup /> },
+  { id: "security", badge: "Privacy by Design", title: "Privacy practices, clearly explained", description: "NOT ALONE is a concept site. Before any account or chat feature launches, we will publish clear privacy, security, and data-retention practices.", mockup: <PrivacyMockup />, reversed: true },
 ];
 
 export default function Features() {
@@ -46,31 +18,13 @@ export default function Features() {
     <SectionWrapper id="features" className="bg-white">
       <FadeIn>
         <div className="mb-20 text-center">
-          <span className="rounded-full bg-[#f1f3f4] px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#5f6368]">
-            Platform Capabilities
-          </span>
-          <h2 className="antigravity-headline mt-4 text-3xl font-medium tracking-tight text-[#111827] sm:text-4xl md:text-5xl">
-            Everything you need to feel connected
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-[#5f6368] sm:text-lg">
-            Built from the ground up for empathy, companionship, and seamless
-            interaction across web and mobile.
-          </p>
+          <span className="rounded-full bg-[#f1f3f4] px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#5f6368]">Product Preview</span>
+          <h2 className="antigravity-headline mt-4 text-3xl font-medium tracking-tight text-[#111827] sm:text-4xl md:text-5xl">A vision for more connected moments</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base text-[#5f6368] sm:text-lg">Explore early concepts for companionship, games, and community—built with clarity and care in mind.</p>
         </div>
       </FadeIn>
-
       <div className="space-y-24 sm:space-y-32">
-        {features.map((feature, i) => (
-          <FeatureBlock
-            key={i}
-            id={feature.id}
-            badge={feature.badge}
-            title={feature.title}
-            description={feature.description}
-            mockup={feature.mockup}
-            reversed={feature.reversed}
-          />
-        ))}
+        {features.map((feature, index) => <FeatureBlock key={index} {...feature} />)}
       </div>
     </SectionWrapper>
   );
