@@ -32,21 +32,27 @@ export default function IconRibbonManifesto() {
         <div className="flex items-center justify-between gap-2 overflow-x-auto pb-8 pt-4 no-scrollbar sm:justify-center sm:gap-4 md:gap-5">
           {icons.map((item, idx) => {
             const curveOffset = getCurveY(idx, icons.length);
+            // The arch offset lives on a plain wrapper so framer-motion's own
+            // slide-in animation (which also sets "transform") can't wipe it out.
             return (
-              <motion.div
+              <div
                 key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.03 }}
+                className="shrink-0"
                 style={{ transform: `translateY(${curveOffset}px)` }}
-                className="group flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full border border-[#e8eaed] bg-white text-xs font-semibold text-[#3c4043] shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-200 hover:-translate-y-1 hover:border-[#dadce0] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] sm:h-14 sm:w-14 sm:text-sm"
-                title={item.label}
               >
-                <span className="font-mono text-[#5f6368] transition-colors group-hover:text-black">
-                  {item.icon}
-                </span>
-              </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.03 }}
+                  className="group flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-[#e8eaed] bg-white text-xs font-semibold text-[#3c4043] shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-200 hover:-translate-y-1 hover:border-[#dadce0] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] sm:h-14 sm:w-14 sm:text-sm"
+                  title={item.label}
+                >
+                  <span className="font-mono text-[#5f6368] transition-colors group-hover:text-black">
+                    {item.icon}
+                  </span>
+                </motion.div>
+              </div>
             );
           })}
         </div>

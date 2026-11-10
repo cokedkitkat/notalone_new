@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const messages = [
   {
@@ -24,8 +24,6 @@ const messages = [
 ];
 
 export default function ChatMockup() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <div className="relative mx-auto w-full max-w-xl text-left">
       {/* Decorative backdrop glow */}
@@ -93,8 +91,6 @@ export default function ChatMockup() {
                 </div>
               </div>
             );
-
-            if (shouldReduceMotion) return bubble;
 
             return (
               <motion.div

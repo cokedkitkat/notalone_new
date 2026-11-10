@@ -8,7 +8,7 @@ import ChatMockup from "./ChatMockup";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[92vh] flex-col items-center justify-center overflow-hidden bg-white px-6 pt-12 pb-24 sm:px-8 sm:pt-20 lg:px-12">
+    <section className="relative flex min-h-[90vh] flex-col items-center overflow-hidden bg-white px-6 pt-12 pb-24 sm:px-8 sm:pt-16 md:pt-20 lg:px-12">
       {/* Particle Vortex Background matching Screenshot 2 */}
       <ParticleVortex />
 
@@ -16,19 +16,19 @@ export default function Hero() {
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center text-center">
         {/* Top Product Pill / Badge with User's Exact Logo */}
         <motion.div
-          initial={{ opacity: 0, y: -12 }}
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8 flex items-center gap-2 rounded-full border border-[#e8eaed] bg-white/95 px-4 py-1.5 shadow-[0_2px_8px_rgba(0,0,0,0.03)] backdrop-blur-sm"
+          transition={{ duration: 0.45 }}
+          className="mb-8 flex items-center gap-2 rounded-full border border-[#dadce0] bg-white/95 px-4 py-1.5 shadow-[0_2px_8px_rgba(0,0,0,0.04)] backdrop-blur-sm"
         >
-          <Logo size={24} showText={true} />
+          <Logo size={22} showText={true} />
         </motion.div>
 
         {/* Big Headline matching Screenshot 2: strictly 2 lines */}
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.55, delay: 0.08 }}
           className="antigravity-headline mx-auto max-w-5xl text-center text-4xl font-normal tracking-[-0.04em] text-[#111827] sm:text-5xl md:text-6xl lg:text-[68px] xl:text-[74px] lg:leading-[1.08]"
         >
           <span className="block sm:whitespace-nowrap">
@@ -41,9 +41,9 @@ export default function Hero() {
 
         {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.55, delay: 0.16 }}
           className="mx-auto mt-6 max-w-2xl text-lg text-[#5f6368] sm:text-xl"
         >
           Talk to intelligent AI companions anytime, play classic games together,
@@ -52,10 +52,10 @@ export default function Hero() {
 
         {/* Primary CTA Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-9 flex flex-col items-center gap-3 sm:flex-row"
+          transition={{ duration: 0.55, delay: 0.24 }}
+          className="mt-8 flex flex-col items-center gap-3 sm:flex-row"
         >
           <Button
             href="https://notalone-community.vercel.app"
@@ -86,10 +86,10 @@ export default function Hero() {
 
         {/* Floating Chat Mockup */}
         <motion.div
-          initial={{ opacity: 0, y: 36 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-16 w-full max-w-2xl"
+          transition={{ duration: 0.7, delay: 0.32 }}
+          className="mt-14 w-full max-w-2xl"
         >
           <ChatMockup />
         </motion.div>

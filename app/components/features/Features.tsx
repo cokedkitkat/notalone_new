@@ -23,6 +23,7 @@ const features = [
     reversed: true,
   },
   {
+    id: "community",
     badge: "Shared Connection",
     title: "Join a warm community space",
     description:
@@ -30,6 +31,7 @@ const features = [
     mockup: <CommunityMockup />,
   },
   {
+    id: "security",
     badge: "Safety by Design",
     title: "Your privacy, completely protected",
     description:
@@ -61,6 +63,7 @@ export default function Features() {
         {features.map((feature, i) => (
           <FeatureBlock
             key={i}
+            id={feature.id}
             badge={feature.badge}
             title={feature.title}
             description={feature.description}

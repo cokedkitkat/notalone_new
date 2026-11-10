@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const board = [
   ["X", "O", "X"],
@@ -9,8 +9,6 @@ const board = [
 ];
 
 export default function TicTacToeBoard() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <div className="mx-auto grid w-fit grid-cols-3 gap-2.5">
       {board.flat().map((cell, i) => {
@@ -29,7 +27,7 @@ export default function TicTacToeBoard() {
           </div>
         );
 
-        if (shouldReduceMotion || !cell) {
+        if (!cell) {
           return <div key={i}>{content}</div>;
         }
 

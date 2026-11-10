@@ -1,3 +1,5 @@
+"use client";
+
 import SectionWrapper from "../ui/SectionWrapper";
 import FadeIn from "../ui/FadeIn";
 import CompanionCard from "./CompanionCard";

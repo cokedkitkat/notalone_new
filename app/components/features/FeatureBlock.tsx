@@ -6,6 +6,7 @@ type FeatureBlockProps = {
   description: string;
   mockup: React.ReactNode;
   reversed?: boolean;
+  id?: string;
 };
 
 export default function FeatureBlock({
@@ -14,10 +15,12 @@ export default function FeatureBlock({
   description,
   mockup,
   reversed = false,
+  id,
 }: FeatureBlockProps) {
   return (
     <div
-      className={`flex flex-col items-center gap-12 lg:flex-row lg:gap-20 ${
+      id={id}
+      className={`scroll-mt-28 flex flex-col items-center gap-12 lg:flex-row lg:gap-20 ${
         reversed ? "lg:flex-row-reverse" : ""
       }`}
     >

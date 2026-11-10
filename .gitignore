@@ -1,1 +1,19 @@
+# dependencies
 node_modules
+
+# Next.js build output (generated, should never be committed)
+.next
+out
+build
+
+# TypeScript build cache
+*.tsbuildinfo
+
+# environment files (may hold secrets)
+.env
+.env.*
+!.env.example
+
+# logs and OS files
+npm-debug.log*
+.DS_Store

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
 type CompanionCardProps = {
   name: string;
@@ -19,8 +19,6 @@ export default function CompanionCard({
   gradient,
   delay = 0,
 }: CompanionCardProps) {
-  const shouldReduceMotion = useReducedMotion();
-
   const card = (
     <div className="group relative flex w-64 shrink-0 flex-col items-center rounded-2xl border border-[#e8eaed] bg-white p-7 text-center transition-all duration-300 hover:-translate-y-1.5 hover:border-[#dadce0] hover:shadow-[0_16px_36px_rgba(0,0,0,0.06)]">
       {/* Avatar Icon */}
@@ -51,8 +49,6 @@ export default function CompanionCard({
       </a>
     </div>
   );
-
-  if (shouldReduceMotion) return card;
 
   return (
     <motion.div

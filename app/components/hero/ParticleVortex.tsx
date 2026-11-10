@@ -8,23 +8,30 @@ export default function ParticleVortex() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
-    let animationFrameId: number;
-    let width = (canvas.width = canvas.offsetWidth * window.devicePixelRatio);
-    let height = (canvas.height = canvas.offsetHeight * window.devicePixelRatio);
+    let animationFrameId = 0;
+    let isVisible = true;
+    let lastTime = performance.now();
 
-    const colors = [
-      "#4285f4", // blue
-      "#34a853", // green
-      "#fbbc05", // yellow
-      "#ea4335", // red
-      "#8b5cf6", // purple
-      "#ec4899", // pink
-      "#06b6d4", // cyan
-      "#f97316", // orange
-      "#3b82f6", // royal blue
+    const dpr = Math.min(typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1, 2);
+
+    let cssWidth = canvas.offsetWidth;
+    let cssHeight = canvas.offsetHeight;
+    canvas.width = Math.round(cssWidth * dpr);
+    canvas.height = Math.round(cssHeight * dpr);
+
+    const colorPalette = [
+      "#4285f4", // Google Blue
+      "#34a853", // Google Green
+      "#fbbc05", // Google Yellow
+      "#ea4335", // Google Red
+      "#8b5cf6", // Purple
+      "#ec4899", // Pink
+      "#06b6d4", // Cyan
+      "#f97316", // Orange
+      "#3b82f6", // Royal Blue
     ];
 
     interface Particle {
@@ -32,93 +39,148 @@ export default function ParticleVortex() {
       radiusY: number;
       angle: number;
       speed: number;
-      size: number;
-      color: string;
+      length: number;
+      width: number;
+      colorIndex: number;
       alpha: number;
-      rotation: number;
     }
 
-    const particles: Particle[] = [];
+    const colorGroups: Particle[][] = colorPalette.map(() => []);
+
+    // Exact ring distribution matching Google Antigravity reference (Screenshot 2)
+    // Tightly wraps around the 2-line headline without zooming out
     const numRings = 24;
     const particlesPerRing = 26;
 
     for (let r = 0; r < numRings; r++) {
-      const rx = 160 + r * 28;
-      const ry = 90 + r * 16;
+      // Inner ring starts close to headline: rx=175, ry=95
+      const rx = 175 + r * 22;
+      const ry = 95 + r * 14;
+
       for (let p = 0; p < particlesPerRing; p++) {
-        const baseAngle = (p / particlesPerRing) * Math.PI * 2 + (r * 0.12);
-        const color = colors[(r * 3 + p) % colors.length];
-        particles.push({
-          radiusX: rx + (Math.random() - 0.5) * 12,
-          radiusY: ry + (Math.random() - 0.5) * 8,
-          angle: baseAngle + (Math.random() - 0.5) * 0.05,
-          speed: 0.0003 + (r % 2 === 0 ? 0.0001 : -0.0001),
-          size: 2.5 + (r % 3) * 0.8,
-          color,
-          alpha: Math.min(0.85, 0.25 + (r / numRings) * 0.6),
-          rotation: baseAngle + Math.PI / 4,
-        });
+        const baseAngle = (p / particlesPerRing) * Math.PI * 2 + r * 0.11;
+        const colorIndex = (r * 3 + p) % colorPalette.length;
+
+        const particle: Particle = {
+          radiusX: rx + (Math.random() - 0.5) * 10,
+          radiusY: ry + (Math.random() - 0.5) * 7,
+          angle: baseAngle + (Math.random() - 0.5) * 0.04,
+          speed: 0.00028 + (r % 2 === 0 ? 0.00009 : -0.00007),
+          length: 5.5 + (r % 3) * 1.1,
+          width: 2.2 + (r % 2) * 0.4,
+          colorIndex,
+          alpha: Math.min(0.88, 0.28 + (r / numRings) * 0.58),
+        };
+
+        colorGroups[colorIndex].push(particle);
       }
     }
 
-    const handleResize = () => {
-      if (!canvas) return;
-      width = canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      height = canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-    };
-
-    window.addEventListener("resize", handleResize);
-
     const render = () => {
-      ctx.clearRect(0, 0, width, height);
+      if (!isVisible) {
+        animationFrameId = 0;
+        return;
+      }
 
-      const centerX = width / 2;
-      const centerY = height / 2;
+      const now = performance.now();
+      const delta = Math.min((now - lastTime) / 16.67, 2.0);
+      lastTime = now;
 
-      for (const p of particles) {
-        p.angle += p.speed;
+      // Reset transform and clear in physical device pixels
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        const x = centerX + Math.cos(p.angle) * (p.radiusX * (width / 1400));
-        const y = centerY + Math.sin(p.angle) * (p.radiusY * (height / 850));
+      // Set scale to dpr so all coordinates are pure CSS pixels
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        // Draw small dash particle aligned with the ellipse tangent
-        ctx.save();
-        ctx.translate(x, y);
-        // Tangent angle
-        const tangent = p.angle + Math.PI / 2;
-        ctx.rotate(tangent);
+      const centerX = cssWidth / 2;
+      const centerY = cssHeight / 2 - 20; // Center around the headline
 
-        ctx.globalAlpha = p.alpha;
-        ctx.fillStyle = p.color;
+      // Adapt gracefully on smaller viewports without blowing up on wide screens
+      const scale = Math.min(1.0, Math.max(0.55, cssWidth / 1280));
 
-        // Draw elongated rounded confetti dash
-        const dashLength = p.size * 2.2;
-        const dashWidth = p.size * 0.9;
-        ctx.beginPath();
-        ctx.roundRect(-dashWidth / 2, -dashLength / 2, dashWidth, dashLength, 2);
-        ctx.fill();
+      ctx.lineCap = "round";
 
-        ctx.restore();
+      for (let c = 0; c < colorGroups.length; c++) {
+        const group = colorGroups[c];
+        ctx.strokeStyle = colorPalette[c];
+
+        for (let i = 0; i < group.length; i++) {
+          const p = group[i];
+          p.angle += p.speed * delta;
+
+          const cx = centerX + Math.cos(p.angle) * p.radiusX * scale;
+          const cy = centerY + Math.sin(p.angle) * p.radiusY * scale;
+
+          const tangent = p.angle + Math.PI / 2;
+          const halfLen = p.length / 2;
+          const dx = Math.cos(tangent) * halfLen;
+          const dy = Math.sin(tangent) * halfLen;
+
+          ctx.globalAlpha = p.alpha;
+          ctx.lineWidth = p.width;
+
+          ctx.beginPath();
+          ctx.moveTo(cx - dx, cy - dy);
+          ctx.lineTo(cx + dx, cy + dy);
+          ctx.stroke();
+        }
       }
 
       animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    const startLoop = () => {
+      if (!animationFrameId) {
+        lastTime = performance.now();
+        animationFrameId = requestAnimationFrame(render);
+      }
+    };
+
+    const stopLoop = () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = 0;
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          startLoop();
+        } else {
+          stopLoop();
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(canvas);
+
+    const handleResize = () => {
+      if (!canvas) return;
+      cssWidth = canvas.offsetWidth;
+      cssHeight = canvas.offsetHeight;
+      canvas.width = Math.round(cssWidth * dpr);
+      canvas.height = Math.round(cssHeight * dpr);
+    };
+
+    window.addEventListener("resize", handleResize, { passive: true });
+    startLoop();
 
     return () => {
+      observer.disconnect();
       window.removeEventListener("resize", handleResize);
-      cancelAnimationFrame(animationFrameId);
+      stopLoop();
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none absolute inset-0 h-full w-full opacity-90"
-      style={{ width: "100%", height: "100%" }}
+      className="pointer-events-none absolute inset-0 h-full w-full opacity-90 will-change-transform"
+      style={{ width: "100%", height: "100%", transform: "translateZ(0)" }}
       aria-hidden="true"
     />
   );
 }
-

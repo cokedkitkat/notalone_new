@@ -1,6 +1,10 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+
+// Dark (black-side) chess glyphs. Used to colour each piece by its own glyph
+// rather than by which row it happens to sit on.
+const DARK_PIECES = "♜♞♝♛♚♟";
 
 const pieces: Record<string, string> = {
   "0-0": "♜",
@@ -39,8 +43,6 @@ const pieces: Record<string, string> = {
 };
 
 export default function ChessBoard() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <div className="inline-grid grid-cols-8 overflow-hidden rounded-xl border border-[#dadce0] shadow-sm">
       {Array.from({ length: 64 }).map((_, i) => {
@@ -59,7 +61,7 @@ export default function ChessBoard() {
             {piece && (
               <span
                 className={
-                  row <= 1
+                  DARK_PIECES.includes(piece)
                     ? "text-[#111827] drop-shadow-xs"
                     : "text-blue-700 drop-shadow-xs"
                 }
@@ -70,7 +72,7 @@ export default function ChessBoard() {
           </div>
         );
 
-        if (shouldReduceMotion || !piece) {
+        if (!piece) {
           return cell;
         }
 

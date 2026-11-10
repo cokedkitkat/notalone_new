@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type LogoProps = {
   size?: number;
   className?: string;
@@ -17,16 +19,14 @@ export default function Logo({
         never mixes with the white website background.
       */}
       <div
-        className="flex shrink-0 items-center justify-center rounded-xl bg-color-grey p-2 border-neutral-800 shadow-xs transition-transform duration-200 hover:scale-105"
+        className="flex shrink-0 items-center justify-center rounded-xl border border-neutral-800 bg-[#111827] p-2 shadow-xs transition-transform duration-200 hover:scale-105"
         style={{ width: `${size}px`, height: `${size}px` }}
       >
-        <img
+        <Image
           src="/logo-original-cropped.png"
           alt="NOT ALONE Logo"
-          style={{
-            width: `${Math.round(size * 0.72)}px`,
-            height: `${Math.round(size * 0.72)}px`,
-          }}
+          width={Math.round(size * 0.72)}
+          height={Math.round(size * 0.72)}
           className="object-contain"
         />
       </div>
