@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import MotionProvider from "./components/ui/MotionProvider";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-plus-jakarta-sans",
-  display: "swap",
-});
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
+const googleSans = localFont({
+  src: "./fonts/GoogleSans-VariableFont_GRAD,opsz,wght.ttf",
+  variable: "--font-google-sans",
+  weight: "100 900",
   display: "swap",
 });
 
@@ -30,7 +25,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={[plusJakartaSans.variable, outfit.variable, "antialiased"].join(" ")}>
+      <body className={[googleSans.variable, "antialiased"].join(" ")}>
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
