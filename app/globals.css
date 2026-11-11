@@ -13,6 +13,7 @@
 html { scroll-behavior: smooth; color-scheme: light; }
 body { margin: 0; font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 .font-heading, .antigravity-headline, .antigravity-manifesto { font-family: var(--font-headline); }
+.footer-wordmark { margin: 0; font-family: var(--font-headline); font-weight: 500; font-size: 17.2vw; letter-spacing: -0.045em; line-height: 0.78; color: #111827; white-space: nowrap; text-align: center; padding-right: 1.25vw; }
 .antigravity-headline { letter-spacing: -0.04em; line-height: 1.08; font-weight: 500; }
 .antigravity-manifesto { letter-spacing: -0.035em; line-height: 1.18; font-weight: 500; }
 
