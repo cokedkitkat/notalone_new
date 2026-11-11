@@ -24,8 +24,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={[googleSans.variable, "antialiased"].join(" ")}>
+    <html lang="en" className={googleSans.variable}>
+      <body className="antialiased">
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
