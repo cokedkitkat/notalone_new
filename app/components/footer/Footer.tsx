@@ -24,8 +24,8 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Giant brand wordmark. Decorative only (the brand name is already in the
-          logo above), so screen readers skip it. Sized in vw so it always spans
+      {/* Giant brand wordmark. Decorative only (the logo link below is labelled
+          "NOT ALONE" for screen readers), so they skip this. Sized in vw so it always spans
           the full width of the page. */}
       <div aria-hidden="true" className="select-none overflow-hidden px-[4.5vw] pt-4 pb-10 sm:pb-14">
         <p className="footer-wordmark">NOT ALONE</p>
@@ -33,7 +33,7 @@ export default function Footer() {
 
       <div className="mx-auto max-w-7xl px-6 pb-16 sm:px-8 lg:px-12">
         <div className="flex flex-col items-center justify-between gap-4 border-t border-[#f1f3f4] pt-8 sm:flex-row">
-          <Link href="#"><Logo size={28} /></Link>
+          <Link href="#" aria-label="NOT ALONE home"><Logo size={28} showText={false} /></Link>
           <p className="text-xs text-[#80868b]">© {new Date().getFullYear()} NOT ALONE. A product concept for connection and care.</p>
         </div>
       </div>
