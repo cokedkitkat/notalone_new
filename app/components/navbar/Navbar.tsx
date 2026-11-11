@@ -14,22 +14,10 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [bannerVisible, setBannerVisible] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <div className="sticky top-0 z-50 w-full bg-white">
-      {bannerVisible && (
-        <div className="relative flex items-center justify-center border-b border-[#e8eaed] bg-white px-4 py-2 text-xs text-[#1f1f1f]">
-          <div className="flex flex-wrap items-center justify-center gap-2 pr-6">
-            <span className="flex items-center gap-1 rounded-full bg-black px-2.5 py-0.5 text-[11px] font-semibold text-white"><span className="text-[10px]">✦</span> PREVIEW</span>
-            <span className="font-normal text-[#3c4043]">NOT ALONE is currently a product concept and visual preview.</span>
-            <span className="hidden text-[#dadce0] sm:inline">|</span>
-            <Link href="/safety" className="inline-flex items-center gap-1 font-medium text-[#111827] hover:underline">Learn more <span aria-hidden="true">→</span></Link>
-          </div>
-          <button onClick={() => setBannerVisible(false)} className="absolute right-4 text-[#5f6368] hover:text-black" aria-label="Dismiss banner">✕</button>
-        </div>
-      )}
       <header className="border-b border-[#f1f3f4] bg-white/95 backdrop-blur-md">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 sm:px-8 lg:px-12" aria-label="Main navigation">
           <Link href="#"><Logo size={22} /></Link>
