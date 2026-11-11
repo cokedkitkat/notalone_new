@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Button from "../ui/Button";
-import Logo from "../ui/Logo";
 import ParticleVortex from "./ParticleVortex";
 import ChatMockup from "./ChatMockup";
 
@@ -11,7 +10,6 @@ export default function Hero() {
     <section className="relative flex min-h-[90vh] flex-col items-center overflow-hidden bg-white px-6 pt-12 pb-24 sm:px-8 sm:pt-16 md:pt-20 lg:px-12">
       <ParticleVortex />
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center text-center">
-        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }} className="mb-8 flex items-center gap-2 rounded-full border border-[#dadce0] bg-white/95 px-4 py-1.5 shadow-[0_2px_8px_rgba(0,0,0,0.04)] backdrop-blur-sm"><Logo size={22} showText /></motion.div>
         <motion.h1 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.08 }} className="antigravity-headline mx-auto max-w-5xl text-center text-4xl font-normal tracking-[-0.04em] text-[#111827] sm:text-5xl md:text-6xl lg:text-[68px] xl:text-[74px] lg:leading-[1.08]">
           <span className="block sm:whitespace-nowrap">Explore a vision for more</span>
           <span className="block font-medium text-black sm:whitespace-nowrap">connected digital moments</span>
