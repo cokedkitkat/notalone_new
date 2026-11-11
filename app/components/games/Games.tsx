@@ -26,7 +26,7 @@ export default function Games() {
         </div>
       </FadeIn>
 
-      <div className="flex flex-col items-center justify-center gap-8 sm:flex-row sm:items-stretch sm:gap-10">
+      <div className="flex flex-col items-center justify-center gap-8 sm:flex-row sm:items-stretch sm:gap-12 lg:gap-16">
         <FadeIn delay={0.1} className="flex w-full justify-center sm:w-auto">
           <div className={cardClassName}>
             <span className="mb-1 text-xs font-semibold uppercase tracking-wider text-blue-600">
