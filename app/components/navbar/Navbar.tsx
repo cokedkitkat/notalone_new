@@ -32,7 +32,7 @@ export default function Navbar() {
       )}
       <header className="border-b border-[#f1f3f4] bg-white/95 backdrop-blur-md">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 sm:px-8 lg:px-12" aria-label="Main navigation">
-          <Link href="#"><Logo size={36} /></Link>
+          <Link href="#"><Logo size={22} /></Link>
           <ul className="hidden items-center gap-7 md:flex" role="list">
             {navLinks.map((link) => <li key={link.label}><a href={link.href} className="font-heading flex items-center gap-1 text-[13.5px] font-medium text-[#444746] transition-colors duration-150 hover:text-black">{link.label}</a></li>)}
           </ul>
